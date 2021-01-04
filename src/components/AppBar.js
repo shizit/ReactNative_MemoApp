@@ -12,11 +12,11 @@ function AppBar(props){
 }
 
 const styles = StyleSheet.create({
-    
+
     appbar: {
         position: 'absolute',
-        top: 0,
         height: 78,
+        top: 0,
         left: 0,
         right: 0,
         paddingTop:30,

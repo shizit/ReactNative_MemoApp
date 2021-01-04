@@ -18,12 +18,12 @@ import CircleButton from '../elements/CircleButton';
 
 const styles = StyleSheet.create({
   container: {
+    top: 78,
     flex: 1,
     width: '100%',
 
   },
   memoEditInput: {
-    top:78,
     paddingTop: 32,
     paddingLeft: 16,
     paddingRight: 16,

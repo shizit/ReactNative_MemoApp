@@ -28,12 +28,12 @@ import { Octicons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
     container: {
+        top: 78,
         flex: 1,
         width: '100%',
     },
 
     memoHeader: {
-        top: 78,
         height: 100,
         padding: 10,
         backgroundColor: '#17313C',

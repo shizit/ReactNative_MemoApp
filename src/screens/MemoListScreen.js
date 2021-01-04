@@ -15,6 +15,7 @@ import CircleButton from '../elements/CircleButton';
 
 const styles = StyleSheet.create({
   container: {
+    top: 78,
     flex: 1,
     width: '100%',
 
