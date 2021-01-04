@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet, View, Text, TextInput, TouchableHighlight,
+  StyleSheet, View, Text, TextInput,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -11,9 +11,17 @@ function SignupScreen(props) {
       <Text style={styles.titleText}>メンバー登録</Text>
       <TextInput style={styles.input} value="Email Address" />
       <TextInput style={styles.input} value="Password" />
-      <TouchableHighlight style={styles.button} underlayColor="#0074D1" onPress={() => { navigation.navigate('MemoList'); }}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'MemoList' }],
+          });
+        }}
+      >
         <Text style={styles.buttonText}>送信する</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Already registered? </Text>
         <TouchableOpacity onPress={() => { navigation.navigate('Login'); }}>

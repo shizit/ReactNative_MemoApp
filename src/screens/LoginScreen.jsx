@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import {
+  StyleSheet, View, Text, TextInput,
+} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function LoginScreen(props) {
@@ -9,9 +11,17 @@ function LoginScreen(props) {
       <Text style={styles.titleText}>Login</Text>
       <TextInput style={styles.input} value="Email Address" />
       <TextInput style={styles.input} value="Password" />
-      <TouchableHighlight style={styles.button} underlayColor="#0074D1" onPress={() => { navigation.navigate('MemoList'); }}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'MemoList' }],
+          });
+        }}
+      >
         <Text style={styles.buttonText}>Login</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Not registered? </Text>
         <TouchableOpacity onPress={() => { navigation.navigate('Signup'); }}>

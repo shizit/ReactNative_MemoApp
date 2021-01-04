@@ -1,27 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { func, string } from 'prop-types';
+import {
+  PropTypes, func, shape, string,
+} from 'prop-types';
 
 function CircleButton(props) {
-  const { children, color, onPress } = props;
-  let bgColor = '#E31676';
-  let textColor = '#fff';
-  if (color === 'white') {
-    bgColor = '#fff';
-    textColor = '#E31676';
-  }
+  const {
+    children, textColor, color, onPress,
+  } = props;
 
   return (
-    // eslint-disable-next-line no-use-before-define
-    <TouchableOpacity onPress={onPress} style={[styles.circleButton, { backgroundColor: bgColor }]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.circleButton, { backgroundColor: color }]}
+    >
       <Text style={[styles.circleButtonText, { color: textColor }]}>{children}</Text>
     </TouchableOpacity>
   );
 }
 
-CircleButton.prototypes = {
+CircleButton.propTypes = {
+  children: PropTypes.oneOfType([string, shape()]),
   color: string,
-  onPress: func,
+  textColor: string,
+  onPress: func.isRequired,
+};
+
+CircleButton.defaultProps = {
+  children: null,
+  color: '#E31676',
+  textColor: '#fff',
 };
 
 const styles = StyleSheet.create({
