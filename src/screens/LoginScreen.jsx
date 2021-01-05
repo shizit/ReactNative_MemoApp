@@ -8,7 +8,7 @@ function LoginScreen(props) {
   const { navigation } = props;
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Login</Text>
+      <Text style={styles.titleText}>ログイン</Text>
       <TextInput style={styles.input} value="Email Address" />
       <TextInput style={styles.input} value="Password" />
       <TouchableOpacity
@@ -20,11 +20,18 @@ function LoginScreen(props) {
           });
         }}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>ログインする</Text>
       </TouchableOpacity>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Not registered? </Text>
-        <TouchableOpacity onPress={() => { navigation.navigate('Signup'); }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Signup' }],
+            });
+          }}
+        >
           <Text style={styles.footerLink}>Sign up here!</Text>
         </TouchableOpacity>
       </View>

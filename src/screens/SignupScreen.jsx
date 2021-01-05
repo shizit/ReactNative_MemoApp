@@ -20,11 +20,18 @@ function SignupScreen(props) {
           });
         }}
       >
-        <Text style={styles.buttonText}>送信する</Text>
+        <Text style={styles.buttonText}>登録する</Text>
       </TouchableOpacity>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Already registered? </Text>
-        <TouchableOpacity onPress={() => { navigation.navigate('Login'); }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Login' }],
+            });
+          }}
+        >
           <Text style={styles.footerLink}>Log In.</Text>
         </TouchableOpacity>
       </View>
@@ -34,10 +41,10 @@ function SignupScreen(props) {
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     width: '100%',
-
   },
 
   titleText: {

@@ -6,35 +6,37 @@ import {
 
 function CircleButton(props) {
   const {
-    children, textColor, color, onPress,
+    children, style, childStyle, onPress,
   } = props;
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.circleButton, { backgroundColor: color }]}
+      style={[styles.circleButton, style]}
     >
-      <Text style={[styles.circleButtonText, { color: textColor }]}>{children}</Text>
+      <Text style={[styles.circleButtonText, childStyle]}>{children}</Text>
     </TouchableOpacity>
   );
 }
 
 CircleButton.propTypes = {
   children: PropTypes.oneOfType([string, shape()]),
-  color: string,
-  textColor: string,
-  onPress: func.isRequired,
+  style: shape(),
+  childStyle: shape(),
+  onPress: func,
 };
 
 CircleButton.defaultProps = {
   children: null,
-  color: '#E31676',
-  textColor: '#fff',
+  style: null,
+  childStyle: null,
+  onPress: null,
 };
 
 const styles = StyleSheet.create({
 
   circleButton: {
+    backgroundColor: '#E31676',
     position: 'absolute',
     bottom: 32,
     right: 32,

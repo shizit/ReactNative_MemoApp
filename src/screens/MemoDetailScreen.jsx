@@ -20,7 +20,6 @@ function MemoDetailScreen(props) {
       </View>
 
       <CircleButton
-        color="white"
         onPress={() => { navigation.navigate('MemoEdit'); }}
         style={styles.editButton}
       >
@@ -72,6 +71,7 @@ const styles = StyleSheet.create({
 
   editButton: {
     top: 75,
+    backgroundColor: '#fff',
   },
 
 });
