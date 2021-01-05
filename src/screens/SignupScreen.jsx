@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet, View, Text, TextInput,
 } from 'react-native';
@@ -6,11 +6,29 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function SignupScreen(props) {
   const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>メンバー登録</Text>
-      <TextInput style={styles.input} value="Email Address" />
-      <TextInput style={styles.input} value="Password" />
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={(text) => { setEmail(text); }}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder="Email Address"
+        textContentType="emailAddress"
+      />
+      <TextInput
+        style={styles.input}
+        value={password}
+        onChangeText={(text) => { setPassword(text); }}
+        autoCapitalize="none"
+        placeholder="Password"
+        textContentType="password"
+        secureTextEntry
+      />
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
