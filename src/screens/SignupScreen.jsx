@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Text, TextInput,
+  StyleSheet, View, Text, TextInput, Alert,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import firebase from 'firebase';
 
 function SignupScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  function handlePress() {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredencial) => {
+        const { user } = userCredencial;
+        console.log(user.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoList' }],
+        });
+      })
+      .catch((error) => {
+        Alert.alert(error.code);
+        console.log(error.code, error.message);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>メンバー登録</Text>
@@ -31,12 +48,7 @@ function SignupScreen(props) {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'MemoList' }],
-          });
-        }}
+        onPress={handlePress}
       >
         <Text style={styles.buttonText}>登録する</Text>
       </TouchableOpacity>
@@ -46,7 +58,7 @@ function SignupScreen(props) {
           onPress={() => {
             navigation.reset({
               index: 0,
-              routes: [{ name: 'Login' }],
+              routes: [{ name: 'MemoList' }],
             });
           }}
         >
