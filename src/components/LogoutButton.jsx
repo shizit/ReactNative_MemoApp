@@ -1,0 +1,39 @@
+import React from 'react';
+import {
+  TouchableOpacity, StyleSheet, Text, Alert,
+} from 'react-native';
+import firebase from 'firebase';
+import { useNavigation } from '@react-navigation/native';
+
+export default function LogoutButton() {
+  const navigation = useNavigation();
+  function handlePress() {
+    firebase.auth().signOut()
+      .then(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Login' }],
+        });
+      })
+      .catch(() => {
+        Alert.alert('ログアウトに失敗しました');
+      });
+  }
+  return (
+    <TouchableOpacity onPress={handlePress} styles={styles.container}>
+      <Text style={styles.label}>ログアウト</Text>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+  },
+
+  label: {
+    paddingRight: 12,
+    color: 'rgba(255, 255, 255, 0.7)',
+  },
+
+});
