@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
+import firebase from 'firebase';
 import { AntDesign } from '@expo/vector-icons';
 import CircleButton from '../elements/CircleButton';
 
 function MemoCreateScreen(props) {
   const { navigation } = props;
+  const [bodyText, setBodyText] = useState('');
+
+  function handlePress() {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    const ref = db.collection(`users/${currentUser.uid}/memos`);
+    ref.add({
+      bodyText,
+      updateAt: new Date(),
+    })
+      .then((docRef) => {
+        console.log('Created', docRef.id);
+        navigation.goBack();
+      })
+      .catch((error) => {
+        console.log('Error!', error);
+      });
+  }
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.memoEditInput} multiline value="CreateMemo" />
+      <TextInput
+        value={bodyText}
+        multiline
+        style={styles.memoTitleInput}
+        onChangeText={(text) => { setBodyText(text); }}
+        autoFocus
+      />
       <CircleButton
-        onPress={() => { navigation.navigate('MemoList'); }}
+        onPress={handlePress}
       >
         <AntDesign name="check" size={24} color="white" />
       </CircleButton>
@@ -24,7 +50,7 @@ const styles = StyleSheet.create({
     width: '100%',
 
   },
-  memoEditInput: {
+  memoTitleInput: {
     padding: 16,
     fontSize: 20,
   },
