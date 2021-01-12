@@ -1,23 +1,46 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Octicons } from '@expo/vector-icons';
+import { shape, string } from 'prop-types';
+import firebase from 'firebase';
 import CircleButton from '../elements/CircleButton';
+import { dateToString } from '../utils';
 
 function MemoDetailScreen(props) {
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const { id } = route.params;
+  const [memo, setMemo] = useState(null);
+  useEffect(() => {
+    const { currentUser } = firebase.auth();
+    let unsubscribe = () => {};
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      unsubscribe = ref.onSnapshot((doc) => {
+        console.log(doc.id, doc.data());
+        const data = doc.data();
+        setMemo({
+          id: doc.id,
+          bodyText: data.bodyText,
+          updatedAt: data.updatedAt.toDate(),
+        });
+      });
+    }
+    return unsubscribe;
+  }, []);
   return (
     <View style={styles.container}>
 
       <View style={styles.memoHeader}>
-        <Text style={styles.memoHeaderTitle}>講座のアイデア</Text>
-        <Text style={styles.memoHeaderDate}>Yesterday</Text>
+        <Text style={styles.memoHeaderTitle} numberOfLines={1}>{memo && memo.bodyText}</Text>
+        <Text style={styles.memoHeaderDate}>{memo && dateToString(memo.updatedAt)}</Text>
       </View>
 
-      <View style={styles.memoContent}>
+      <ScrollView style={styles.memoContent}>
         <Text style={styles.memoContentText}>
-          講座のアイデアです。
+          {memo && memo.bodyText}
         </Text>
-      </View>
+      </ScrollView>
 
       <CircleButton
         onPress={() => { navigation.navigate('MemoEdit'); }}
@@ -29,6 +52,12 @@ function MemoDetailScreen(props) {
     </View>
   );
 }
+
+MemoDetailScreen.propTypes = {
+  route: shape({
+    params: shape({ id: string }),
+  }).isRequired,
+};
 
 const styles = StyleSheet.create({
 
