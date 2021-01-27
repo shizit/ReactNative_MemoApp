@@ -70,7 +70,7 @@ function LoginScreen(props) {
           onPress={() => {
             navigation.reset({
               index: 0,
-              routes: [{ name: 'MemoList' }],
+              routes: [{ name: 'Signup' }],
             });
           }}
         >
