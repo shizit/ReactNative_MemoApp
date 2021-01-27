@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import {
+  StyleSheet, Text, View, ScrollView,
+} from 'react-native';
 import { Octicons } from '@expo/vector-icons';
 import { shape, string } from 'prop-types';
 import firebase from 'firebase';
@@ -43,7 +45,7 @@ function MemoDetailScreen(props) {
       </ScrollView>
 
       <CircleButton
-        onPress={() => { navigation.navigate('MemoEdit'); }}
+        onPress={() => { navigation.navigate('MemoEdit', { id: memo.id, bodyText: memo.bodyText }); }}
         style={styles.editButton}
       >
         <Octicons name="pencil" size={24} color="#E31676" />
