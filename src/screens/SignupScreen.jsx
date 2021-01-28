@@ -58,7 +58,7 @@ function SignupScreen(props) {
           onPress={() => {
             navigation.reset({
               index: 0,
-              routes: [{ name: 'MemoList' }],
+              routes: [{ name: 'Login' }],
             });
           }}
         >
