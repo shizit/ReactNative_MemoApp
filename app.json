@@ -24,7 +24,7 @@
     "android": {
       "package": "shizit.com.github.memoApp",
       "versionCode": 1,
-      "permisions": [],
+      "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/foreGroundImage.png",
         "backgroundImage": "./assets/backGroundImage.png"
