@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -17,12 +17,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "shizit.com.github.memoApp",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "shizit.com.github.memoApp",
+      "versionCode": 1,
+      "permisions": [],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/foreGroundImage.png",
+        "backgroundImage": "./assets/backGroundImage.png"
       }
     },
     "web": {
